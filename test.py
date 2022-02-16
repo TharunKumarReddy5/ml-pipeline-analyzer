@@ -1,2 +1,3 @@
-from mlpipeline_analyzer import visualize
-md = visualize.show()
+from mlpipeline_visualizer import PipelineDiagram
+
+md = PipelineDiagram.show()

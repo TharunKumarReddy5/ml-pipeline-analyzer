@@ -24,21 +24,6 @@ class PipelineDiagram():
         self.pipe_len = len(list(self.pipe))
         return self.__create_diagram()
     
-    def __parent_classes(self,level=0, base='sklearn'):
-        if level!=0:
-            base = 'sklearn.'+base
-        return list(filter(lambda x: not re.search(r'^_.*', x),dir(eval(base))))
-    
-    def __all_classes(self):
-        l = self.__parent_classes()
-        for i in self.__parent_classes():
-            try:
-                eval(i)
-            except:
-                l.remove(i)
-        class_list = {x:[eval('sklearn.'+x+'.'+y) for y in self.__parent_classes(1,x)] for x in l}
-        return class_list
-    
     def __find_category(self,obj):
         temp = self.__all_classes()
         for i in temp:
@@ -85,3 +70,19 @@ class PipelineDiagram():
         with Cluster("Input Data"):
             return [Database("Train Data"), Database("Validation Data"), Database("Test Data")]
             
+            
+            
+    '''def __parent_classes(self,level=0, base='sklearn'):
+        if level!=0:
+            base = 'sklearn.'+base
+        return list(filter(lambda x: not re.search(r'^_.*', x),dir(eval(base))))
+    
+    def __all_classes(self):
+        l = self.__parent_classes()
+        for i in self.__parent_classes():
+            try:
+                eval(i)
+            except:
+                l.remove(i)
+        class_list = {x:[eval('sklearn.'+x+'.'+y) for y in self.__parent_classes(1,x)] for x in l}
+        return class_list'''

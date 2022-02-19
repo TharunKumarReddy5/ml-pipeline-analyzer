@@ -50,7 +50,7 @@ class PipelineDiagram:
         try:
             comp = str(type(obj)).split('.')[1]
             if type(obj) in temp[comp] and comp!='pipeline':
-                return (comp.title(), obj, self.get_link(type(obj)))
+                return (comp, obj, self.get_link(type(obj)))
             if comp=='pipeline':
                 return list(map(self.find_category, [x[1] for x in obj.transformer_list]))
         except:
@@ -82,7 +82,7 @@ class PipelineDiagram:
 
     def create_diagram(self):
         with Diagram(self.title, show=False) as pipe_diag:
-            inputs = [("Train","Train Data"), ("Validation", "Validation Data"), ("Test","Test Data")]
+            inputs = [("data","Train Data"), ("data", "Validation Data"), ("data","Test Data")]
             start = self.create_cluster("Input Data", inputs) >> self.cn.create_node(("Data Stream","Data Stream"))
             self.traverse_pipeline(start)
         return pipe_diag

@@ -12,54 +12,12 @@ digraph G {
 		Inputs2 -> streamout_Inputs
 		URL="https://stackoverflow.com" label=Inputs
 	}
-	None [label="Custom Function" shape=box]
-	streamout_Inputs -> None
-	"LabelEncoder()" [label="LabelEncoder
-
-" shape=box]
-	None -> "LabelEncoder()"
-	"SimpleImputer()" [label="SimpleImputer
-
-'add_indicator': False\l'copy': True\l'fill_value': None\l'missing_values': nan\l'strategy': 'mean'\l'verbose': 0" shape=box]
-	"LabelEncoder()" -> "SimpleImputer()"
-	"SimpleImputer()" -> streamin_Transformers
-	subgraph cluster_Transformers {
-		node [color=white style=filled]
-		URL="https://stackoverflow.com" color=green style=filled
-		streamout_Transformers [label=Stream shape=box]
-		streamin_Transformers [label=Stream shape=box]
-		streamout_Transformers [label=Union shape=box]
-		Transformers0 [label="MinMaxScaler
-
-'clip': False\l'copy': True\l'feature_range': (0, 1)" shape=box]
-		streamin_Transformers -> Transformers0
-		Transformers0 -> streamout_Transformers
-		Transformers1 [label="StandardScaler
-
-'copy': True\l'with_mean': True\l'with_std': True" shape=box]
-		streamin_Transformers -> Transformers1
-		Transformers1 -> streamout_Transformers
-		Transformers2 [label="Normalizer
-
-'copy': True\l'norm': 'l2'" shape=box]
-		streamin_Transformers -> Transformers2
-		Transformers2 -> streamout_Transformers
-		URL="https://stackoverflow.com" label=Transformers
-	}
-	"RFE(estimator=SVC(degree=5, kernel='poly'), n_features_to_select=1)" [label="RFE
-
-'estimator': SVC(degree=5, kernel='poly')\l'importance_getter': 'auto'\l'n_features_to_select': 1\l'step': 1\l'verbose': 0" shape=box]
-	streamout_Transformers -> "RFE(estimator=SVC(degree=5, kernel='poly'), n_features_to_select=1)"
-	"PCA(n_components=1)" [label="PCA
-
-'copy': True\l'iterated_power': 'auto'\l'n_components': 1\l'random_state': None\l'svd_solver': 'auto'\l'tol': 0.0\l'whiten': False" shape=box]
-	"RFE(estimator=SVC(degree=5, kernel='poly'), n_features_to_select=1)" -> "PCA(n_components=1)"
-	"LinearDiscriminantAnalysis()" [label="LinearDiscriminantAnalysis
-
-'covariance_estimator': None\l'n_components': None\l'priors': None\l'shrinkage': None\l'solver': 'svd'\l'store_covariance': False\l'tol': 0.0001" shape=box]
-	"PCA(n_components=1)" -> "LinearDiscriminantAnalysis()"
-	"RandomForestClassifier(n_estimators=10)" [label="RandomForestClassifier
-
-'bootstrap': True\l'ccp_alpha': 0.0\l'class_weight': None\l'criterion': 'gini'\l'max_depth': None\l'max_features': 'auto'\l'max_leaf_nodes': None\l'max_samples': None\l'min_impurity_decrease': 0.0\l'min_samples_leaf': 1\l'min_samples_split': 2\l'min_weight_fraction_leaf': 0.0\l'n_estimators': 10\l'n_jobs': None\l'oob_score': False\l'random_state': None\l'verbose': 0\l'warm_start': False" shape=box]
-	"LinearDiscriminantAnalysis()" -> "RandomForestClassifier(n_estimators=10)"
+	"Label Encoder" [label="Label Encoder" shape=box]
+	streamout_Inputs -> "Label Encoder"
+	Imputer [label=Imputer shape=box]
+	"Label Encoder" -> Imputer
+	"Standard Scaler" [label="Standard Scaler" shape=box]
+	Imputer -> "Standard Scaler"
+	"Elastic Net Classifier" [label="Elastic Net Classifier" shape=box]
+	"Standard Scaler" -> "Elastic Net Classifier"
 }

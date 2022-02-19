@@ -1,8 +1,7 @@
 diagrams==0.21.1
 graphviz==0.19.1
-Jinja2==3.0.3
 joblib==1.1.0
-MarkupSafe==2.0.1
+MarkupSafe==2.1.0
 numpy==1.22.2
 regex==2022.1.18
 scikit-learn==1.0.2

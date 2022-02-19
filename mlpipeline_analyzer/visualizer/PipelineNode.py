@@ -1,7 +1,7 @@
 from diagrams.aws.cost import CostAndUsageReport
 from diagrams.aws.network import ELB
 from diagrams.gcp.compute import Functions, AppEngine
-from diagrams.gcp.ml import RecommendationsAI, NaturalLanguageAPI, JobsAPI, InterfaceAPI
+from diagrams.gcp.ml import RecommendationsAI, NaturalLanguageAPI, JobsAPI, InferenceAPI
 from diagrams.aws.database import Database
 from diagrams.gcp.analytics import BigQuery, Dataflow, PubSub
 from diagrams.gcp.database import BigTable
@@ -34,7 +34,7 @@ class PipelineNode:
                            'naive_bayes','neighbors', 'neural_network', 'semi_supervised', 'svm', 'tree', 'gradient_boosting', 'xgboost'):
             return ELB(self.name)
         elif self.node in ('model_selection'):
-            return InterfaceAPI(self.name)
+            return InferenceAPI(self.name)
         elif self.node in ('Impute'):
             return CostAndUsageReport(self.name)
         elif self.node in ('inspection', 'metrics'):

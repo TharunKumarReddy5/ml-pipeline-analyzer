@@ -1,25 +1,45 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request
+from flask_executor import Executor
 import os
 import time
 from mlpipeline_analyzer.visualizer import PipelineDiagram
 import joblib
 
 app = Flask(__name__)
+executor = Executor(app)
+PIPELINE_ERROR_MSG = 'Oops! Something went wrong. Make sure the file you uploaded is in the right format and ' \
+                     'contains a scikit-learn pipeline object, else report the issue.'
 
 
 @app.route('/')
 def get_app():
-    return render_template('index.html', view_id='')
+    return render_template('index.html', view_id='', pipeline_img='/static/img.png')
+
+
+def file_clean_up(files):
+    time.sleep(5)
+    for fp in files:
+        os.remove(fp)
 
 
 @app.route('/', methods=['POST'])
 def upload_file():
     uploaded_file = request.files['file']
-    if uploaded_file.filename != '' and uploaded_file.filename.endswith('pkl'):
-        fp = os.path.join('./uploads', 'model' + str(time.time()) + '.pkl')
+    try:
+        fname = str(time.time()) + '.pkl'
+        fp = os.path.join(os.getcwd(), 'uploads', 'model' + fname)
         uploaded_file.save(fp)
-        PipelineDiagram(joblib.load(fp))
-    return render_template('index.html', view_id='tryit')
+        print("plk file:" + fp)
+        PipelineDiagram(joblib.load(fp), file_name=fname[:-4]).create_diagram()
+        pipeline_img_nm = fname[:-3] + 'png'
+        pipeline_img_dest = os.path.join(os.getcwd(), 'static', pipeline_img_nm)
+        os.rename(pipeline_img_nm, pipeline_img_dest)
+        print("file saved:" + fname[:-3] + 'png')
+        executor.submit(file_clean_up, [fp, pipeline_img_dest])
+        return render_template('index.html', view_id='tryit', pipeline_img='/static/' + fname[:-3] + 'png')
+    except Exception:
+        print("Exception occurred with file: " + fp)
+        return render_template('index.html', view_id='tryit', pipeline_img='', alt_text=PIPELINE_ERROR_MSG)
 
 
 if __name__ == '__main__':

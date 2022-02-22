@@ -7,12 +7,14 @@ import regex as re
 import warnings
 #warnings.filterwarnings("ignore")
 
+
 class PipelineDiagram:
-    def __init__(self, pipeline):
+    def __init__(self, pipeline, file_name='ml_pipeline.png'):
         self.pipe = pipeline
         self.title = 'Machine Learning Pipeline'
         self.title_param = 'Machine Learning Parameters Pipeline'
         self.view = True
+        self.file_name = file_name
         self.cn = PipelineNode()
 
     def show(self, title=None):
@@ -81,7 +83,7 @@ class PipelineDiagram:
         return list(map(self.find_category, self.pipe))
 
     def create_diagram(self):
-        with Diagram(self.title, show=False) as pipe_diag:
+        with Diagram(self.title, show=False, filename=self.file_name) as pipe_diag:
             inputs = [("data","Train Data"), ("data", "Validation Data"), ("data","Test Data")]
             start = self.create_cluster("Input Data", inputs) >> self.cn.create_node(("Data Stream","Data Stream"))
             self.traverse_pipeline(start)

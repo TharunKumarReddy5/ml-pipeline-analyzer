@@ -2,34 +2,36 @@ from diagrams import Cluster, Diagram
 from graphviz import Digraph
 from .PipelineNode import PipelineNode
 import sklearn
+import evalml
 from sklearn import *
+from evalml.pipelines.components import *
 import regex as re
 import warnings
 #warnings.filterwarnings("ignore")
 
 
 class PipelineDiagram:
-    def __init__(self, pipeline, file_name='ml_pipeline.png'):
+    def __init__(self, pipeline, file_name='ml_pipeline'):
         self.pipe = pipeline
-        self.title = 'Machine Learning Pipeline'
-        self.title_param = 'Machine Learning Parameters Pipeline'
         self.view = True
         self.file_name = file_name
         self.cn = PipelineNode()
+        if str(type(self.pipe)).split(' ')[1].split('.')[0].replace("'","") == 'evalml':
+            self.base = 'evalml.pipelines.components'
+        else:
+            self.base = 'sklearn'
 
-    def show(self, title=None):
-        self.title = title if title else self.title
+    def show(self, title='Machine Learning Pipeline'):
+        self.title = title
         self.pipe_len = len(list(self.pipe))
         return self.create_diagram()
     
-    def show_params(self, title=None):
-        self.title_param = title if title else self.title_param
+    def show_params(self, title='Machine Learning Parameters Pipeline'):
+        self.title_param = title
         return self.create_param_diagram()
 
-    @staticmethod
-    def parent_classes(level=0, base='sklearn'):
-        if level != 0:
-            base = 'sklearn.' + base
+    def parent_classes(self, base=None):
+        base = base if base!=None else self.base
         return list(filter(lambda x: not re.search(r'^_.*', x), dir(eval(base))))
 
     def all_classes(self):
@@ -39,18 +41,26 @@ class PipelineDiagram:
                 eval(i)
             except:
                 l.remove(i)
-        class_list = {x: [eval('sklearn.' + x + '.' + y) for y in self.parent_classes(1, x)] for x in l}
+        class_list = {x: [eval(self.base+'.' + x + '.' + y) for y in self.parent_classes(self.base+'.'+x) if y!='default_parameters'] for x in l}
         return class_list
 
     def get_link(self, path):
         reg = re.findall(r"'(.*)'", str(path))[0]
-        link = 'https://scikit-learn.org/stable/modules/generated/{0}.html'.format(re.sub("".join(re.findall(r'\.(_.*\.)',reg)),'',reg))
+        if self.base=='evalml.pipelines.components':
+            root_url = 'https://evalml.alteryx.com/en/stable/autoapi/{0}/index.html#{1}'
+            r1 = re.sub("".join(re.findall(r'\.(\w+_.*)',reg)),'',reg)
+            r1 = "/".join(r1.split('.')[:-1])
+            r2 = re.sub("".join(re.findall(r'\.(\w+_.*\.)',reg)),'',reg)
+            link = root_url.format(r1,r2)
+        else:
+            root_url = 'https://scikit-learn.org/stable/modules/generated/{0}.html'
+            link = root_url.format(re.sub("".join(re.findall(r'\.(_.*\.)',reg)),'',reg))
         return link
     
     def find_category(self, obj):
         temp = self.all_classes()
         try:
-            comp = str(type(obj)).split('.')[1]
+            comp = str(type(obj)).split('.')[3] if self.base=='evalml.pipelines.components' else str(type(obj)).split('.')[1]
             if type(obj) in temp[comp] and comp!='pipeline':
                 return (comp, obj, self.get_link(type(obj)))
             if comp=='pipeline':
@@ -70,17 +80,17 @@ class PipelineDiagram:
     
     def get_param(self, obj):
         try:
-            s = list(obj.get_params().items())
+            s = list(obj.parameters.items() if self.base=='evalml.pipelines.components' else obj.get_params().items())
             reg = re.sub(r"(,\s)\'","\l'",str(dict(filter(lambda x: '__' not in x[0] , s))))
             return re.sub('(\(.*\))', '', str(obj))+'\n\n'+re.sub('{|}', '', reg)
         except:
             return str(obj)
     
-    def all_params(self):
-        return list(map(self.find_category_params, self.pipe))
-            
     def all_categories(self):
         return list(map(self.find_category, self.pipe))
+    
+    def all_params(self):
+        return list(map(self.find_category_params, self.pipe))
 
     def create_diagram(self):
         with Diagram(self.title, show=False, filename=self.file_name) as pipe_diag:
@@ -90,7 +100,7 @@ class PipelineDiagram:
         return pipe_diag
     
     def create_param_diagram(self):
-        self.g = Digraph('G', filename='ml_pipeline_params.gv')
+        self.g = Digraph('G', filename='ml_pipeline_params')
         self.g.graph_attr["rankdir"] = "LR"
         self.create_cluster_params('Inputs', ['Train Data', 'Validation Data', 'Test Data'])      
         #self.g.edge('input','streamin')

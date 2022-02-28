@@ -72,17 +72,17 @@ class PipelineDiagram:
         try:
             comp = str(type(obj)).split('.')[1]
             if comp!='pipeline':
-                return (obj, self.get_param(obj))
+                return (obj, (self.get_param(obj), self.get_link(type(obj))))
             if comp=='pipeline':
                 return list(map(self.find_category_params, [x[1] for x in obj.transformer_list]))
         except:
-            return (obj, 'Custom Function')
+            return (obj, ('Custom Function',''))
     
     def get_param(self, obj):
         try:
             s = list(obj.parameters.items() if self.base=='evalml.pipelines.components' else obj.get_params().items())
             reg = re.sub(r"(,\s)\'","\l'",str(dict(filter(lambda x: '__' not in x[0] , s))))
-            return re.sub('(\(.*\))', '', str(obj))+'\n\n'+re.sub('{|}', '', reg)
+            return re.sub('(\(.*\))', '', str(obj))+' |'+re.sub('{|}', '', reg)
         except:
             return str(obj)
     
@@ -100,14 +100,11 @@ class PipelineDiagram:
         return pipe_diag
     
     def create_param_diagram(self):
-        self.g = Digraph('G', filename='ml_pipeline_params')
-        self.g.graph_attr["rankdir"] = "LR"
-        self.create_cluster_params('Inputs', ['Train Data', 'Validation Data', 'Test Data'])      
-        #self.g.edge('input','streamin')
-        #self.g.edge('streamout','Model')
+        self.g = Digraph(name=self.title_param, filename='ml_pipeline_params', graph_attr={"splines": "true", "overlap": "scale", "rankdir": "LR"})
+        self.create_cluster_params('Inputs', [('Train Data',''), ('Validation Data',''), ('Test Data','')])
         self.traverse_pipeline_params()
-        self.g.view()
-        return self
+        #self.g.view()
+        return self.g
 
     def traverse_pipeline(self, curr):
         self.descriptions = list(self.all_categories())
@@ -124,7 +121,7 @@ class PipelineDiagram:
             if type(i) == list:
                 self.create_cluster_params('Transformers', [x[1] for x in i])
             else:
-                self.g.node(str(i[0]), label=i[1], shape='box')
+                self.g.node(str(i[0]), label=i[1][0], URL=i[1][1], shape='record', nodesep='0.03')
                 self.g.edge(self.input, str(i[0]))
                 self.input = str(i[0])
         return self
@@ -137,19 +134,18 @@ class PipelineDiagram:
         with self.g.subgraph(name='cluster_'+cluster_name) as c:
             inlabel = 'streamin_' + cluster_name
             outlabel = 'streamout_' + cluster_name
-            c.attr(style='filled', color='green', URL='https://stackoverflow.com')
-            c.node_attr.update(style='filled', color='white')
-            c.node(outlabel, label='Stream', shape='box')
+            c.attr(label=cluster_name, style='filled', color='cadetblue2', shape='record', nodesep="0.03")
+            c.node(outlabel, label='Stream', shape='box', color='white')
             if cluster_name != 'Inputs':
-                c.node(inlabel, label='Stream', shape='box')
+                c.node(inlabel, label='Stream', shape='box', color='white')
                 self.g.edge(self.input, inlabel)
-                c.node(outlabel, label='Union', shape='box')
+                c.node(outlabel, label='Union', shape='box', color='white')
             for i in range(len(node_names)):
-                c.node(cluster_name+str(i), label=node_names[i], shape='box')
+                c.node(cluster_name+str(i), label=node_names[i][0], URL=node_names[i][1])
                 if cluster_name!='Inputs':
                     c.edge(inlabel, str(cluster_name+str(i)))
                 c.edge(cluster_name+str(i), outlabel)
+            c.node_attr.update(style='filled', color='white', shape='record', nodesep='0.03')
             self.input = outlabel
-            c.attr(label=cluster_name, URL='https://stackoverflow.com')
         
         

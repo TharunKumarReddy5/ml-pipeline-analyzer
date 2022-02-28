@@ -35,7 +35,7 @@ class PipelineNode:
             return ELB(self.name)
         elif self.node in ('model_selection'):
             return InferenceAPI(self.name)
-        elif self.node in ('Impute'):
+        elif self.node in ('impute'):
             return CostAndUsageReport(self.name)
         elif self.node in ('inspection', 'metrics'):
             return JobsAPI(self.name)

@@ -24,18 +24,18 @@ class PipelineNode:
             return Database(self.name)
         elif self.node =='Data Stream':
             return Dataflow("Data Stream")
-        elif self.node in ('compose','covariance','preprocessing','kernel_approximation'):
+        elif self.node in ('compose','covariance','preprocessing','kernel_approximation','transformers'):
             return NaturalLanguageAPI(self.name)
         elif self.node in ('feature_selection', 'feature_extraction', 'manifold', 'random_projection'):
             return RecommendationsAI(self.name)
         elif self.node in ('cross_decomposition','decomposition','discriminant_analysis'):
             return AppEngine(self.name)
         elif self.node in ('cluster', 'ensemble', 'gaussian_process', 'isotonic', 'kernel_ridge', 'linear_model', 'mixture', 'multiclass', 'multioutput', 
-                           'naive_bayes','neighbors', 'neural_network', 'semi_supervised', 'svm', 'tree', 'gradient_boosting', 'xgboost'):
+                           'naive_bayes','neighbors', 'neural_network', 'semi_supervised', 'svm', 'tree', 'gradient_boosting', 'xgboost','estimators'):
             return ELB(self.name)
         elif self.node in ('model_selection'):
             return InferenceAPI(self.name)
-        elif self.node in ('Impute'):
+        elif self.node in ('impute'):
             return CostAndUsageReport(self.name)
         elif self.node in ('inspection', 'metrics'):
             return JobsAPI(self.name)

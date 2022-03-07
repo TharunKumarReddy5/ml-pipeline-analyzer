@@ -1,1 +1,1 @@
-from .PipelineSuggestion import PipelineSuggest
+from .PipelineSuggest import PipelineSuggest

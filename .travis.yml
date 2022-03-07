@@ -28,7 +28,7 @@ install:
 
 # a list of commands to run before the main script
 before_script:
-    - "flake8 ml-pipeline-analyzer"
+    - "flake8 flake8 mlpipeline_analyzer app tests"
 
 # the actual commands to run
 script:
@@ -38,4 +38,3 @@ script:
 after_success:
     - coverage report
     - coveralls
-

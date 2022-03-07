@@ -33,7 +33,7 @@ class PipelineDiagram:
         for i in self.parent_classes():
             try:
                 eval(i)
-            except:
+            except NameError:
                 parent_list.remove(i)
         class_list = {x: [eval(self.base + '.' + x + '.' + y) for y in self.parent_classes(self.base + '.' + x) if
                           y != 'default_parameters'] for x in parent_list}
@@ -61,7 +61,7 @@ class PipelineDiagram:
                 return comp, obj, self.get_link(type(obj))
             if comp == 'pipeline':
                 return list(map(self.find_category, [x[1] for x in obj.transformer_list]))
-        except:
+        except IndexError:
             return 'Custom Function', obj, 'Function'
 
     def find_category_params(self, obj):
@@ -71,15 +71,15 @@ class PipelineDiagram:
                 return obj, (self.get_param(obj), self.get_link(type(obj)))
             if comp == 'pipeline':
                 return list(map(self.find_category_params, [x[1] for x in obj.transformer_list]))
-        except:
+        except IndexError:
             return obj, ('Custom Function', '')
 
     def get_param(self, obj):
         try:
             s = list(obj.parameters.items() if self.base == 'evalml.pipelines.components' else obj.get_params().items())
-            reg = re.sub(r"(,\s)\'", "\l'", str(dict(filter(lambda x: '__' not in x[0], s))))
-            return re.sub('(\(.*\))', '', str(obj)) + ' |' + re.sub('{|}', '', reg)
-        except:
+            reg = re.sub(r"(,\s)\'", r"\l'", str(dict(filter(lambda x: '__' not in x[0], s))))
+            return re.sub(r'(\(.*\))', '', str(obj)) + ' |' + re.sub('{|}', '', reg)
+        except (NameError, IndexError, ReferenceError, Exception):
             return str(obj)
 
     def all_categories(self):

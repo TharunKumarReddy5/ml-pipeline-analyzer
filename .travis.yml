@@ -27,7 +27,7 @@ install:
 
 # a list of commands to run before the main script
 before_script:
-    - "flake8 --ignore=E501,E722,W605,F401 mlpipeline_analyzer app tests"
+    - "flake8 --ignore=E501,F401 mlpipeline_analyzer app tests"
 
 # the actual commands to run
 script:

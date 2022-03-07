@@ -16,7 +16,7 @@ branches:
 sudo: true
 
 before_install:
-    - apt-get install graphviz
+    - sudo apt-get install graphviz
 
 # list of commands to run to setup the environment
 install:

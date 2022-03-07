@@ -1,3 +1,7 @@
+import sklearn
+from sklearn import *
+import evalml
+from evalml.pipelines.components import *
 from diagrams import Cluster, Diagram
 from graphviz import Digraph
 from .PipelineNode import PipelineNode

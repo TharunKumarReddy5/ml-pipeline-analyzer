@@ -24,4 +24,3 @@ class TestPipelineSuggest:
         assert (ps.x_test.shape[0] != 0) is True
         assert (ps.y_train.shape[0] != 0) is True
         assert (ps.y_test.shape[0] != 0) is True
-

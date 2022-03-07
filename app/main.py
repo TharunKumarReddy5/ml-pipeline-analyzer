@@ -36,7 +36,6 @@ def upload_file():
         executor.submit(file_clean_up, [fp, pipeline_img_dest])
         return render_template('index.html', view_id='tryit', pipeline_img='/static/' + fname[:-3] + 'png')
     except Exception as e:
-        print("Exception occurred with file: " + fp)
         print(e)
         return render_template('index.html', view_id='tryit', pipeline_img='', alt_text=PIPELINE_ERROR_MSG)
 

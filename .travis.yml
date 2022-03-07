@@ -35,5 +35,6 @@ script:
 
 # generate a coverage report to send to back to user
 after_success:
+    - coverage run --source=mlpipeline_analyzer,app,tests -m pytest tests/
     - coverage report
     - coveralls

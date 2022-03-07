@@ -2,7 +2,6 @@ from diagrams import Cluster, Diagram
 from diagrams.gcp.analytics import BigQuery, Dataflow, PubSub
 from diagrams.gcp.compute import AppEngine, Functions
 from diagrams.gcp.database import BigTable
-from diagrams.gcp.iot import IotCore
 from diagrams.gcp.storage import GCS
 
 with Diagram("Media Monitoring Storage Architecture", show=False) as med_diag:

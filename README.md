@@ -2,6 +2,7 @@
 # ml-pipeline-analyzer
 [![Build Status](https://app.travis-ci.com/TharunKumarReddy5/ml-pipeline-analyzer.svg?branch=main)](https://app.travis-ci.com/TharunKumarReddy5/ml-pipeline-analyzer)
 [![Coverage Status](https://coveralls.io/repos/github/TharunKumarReddy5/ml-pipeline-analyzer/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/TharunKumarReddy5/ml-pipeline-analyzer?branch=main&kill_cache=1)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
 # Machine Learning Pipeline Analyzer (MLPA)
 
@@ -14,7 +15,7 @@ One of the primary goals of this package is to provide the user with a self-intu
 As a machine learning engineer or a Data Science engineer, we often create ML pipelines that perform multiple tasks like:  
 Data extraction -> Data Cleaning -> Data Manipulation -> Feature Selection/Reduction -> Model train and predict -> Cross Validation -> Model load/save
 
-However, as the various components of a pipeline increase, creating a manual flowchart is not feasible but rather hard to understand/track. And although, there are certain already existing python packages that do visualize these ML pipelines, yet they can hard to explore and understand.
+However, as the various components of a pipeline increase, creating a manual flowchart is not feasible but rather hard to understand/track. And although, there are certain already existing python packages leveraging DAG to visualize these ML pipelines, yet they can be hard to explore and understand.
 Therefore, our goal was to create a package that automates the daunting process of visualizing ML pipelines while also providing a capability to suggest the changes or best pipeline modes for the user inputted dataframes. 
 
 ## Acknowledgements

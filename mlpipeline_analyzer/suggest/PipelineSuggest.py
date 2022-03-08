@@ -72,8 +72,7 @@ class PipelineSuggest:
                 'model' - Suggests the model of the best ML pipeline.
                 'all' - Suggests the best ML pipeline.
         Returns:
-            obj (evalml): Returns evalml object specific to the problem type. This object can be used to access
-                        additional evalml attributes and methods
+            str: Returns the best pipeline part specific to the input parameter.
         """
         if self.best_pipeline is None:
             self._suggest_helper()
@@ -87,4 +86,4 @@ class PipelineSuggest:
         elif suggest_type == 'model':
             return best_pipeline_components[0].strip()
 
-        return self.best_pipeline
+        return self.best_pipeline.summary

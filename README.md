@@ -32,14 +32,6 @@ MLPA is an easier and simpler wrapper using the capabilities from the following 
  - [EvalML Github](https://github.com/alteryx/evalml)
  - [Graphviz](https://graphviz.org/)
  
-## Authors
-- [Aniket Fadia](https://github.com/aniketfadia96)
-- [Jasmine Bhalla](https://github.com/JasmineBhalla17)
-- [Sravan Hande](https://github.com/sravankr96)
-- [Tharun Kumar Reddy Karasani](https://github.com/TharunKumarReddy5)
-
-![GitHub Contributors Image](https://contrib.rocks/image?repo=TharunKumarReddy5/ml-pipeline-analyzer)
-
 ## Installing the package
 
     pip install mlpipeline_analyzer
@@ -109,6 +101,14 @@ Following sofware design principles have been considered while packaging MLPA:
 - Exception Handling
 - Support for automated CI/CD using Travis
 - Unit testing and coverage for quality assurance
+
+## Authors
+- [Aniket Fadia](https://github.com/aniketfadia96)
+- [Jasmine Bhalla](https://github.com/JasmineBhalla17)
+- [Sravan Hande](https://github.com/sravankr96)
+- [Tharun Kumar Reddy Karasani](https://github.com/TharunKumarReddy5)
+
+![GitHub Contributors Image](https://contrib.rocks/image?repo=TharunKumarReddy5/ml-pipeline-analyzer)
 
 ## Contribute
 

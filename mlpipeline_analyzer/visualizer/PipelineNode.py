@@ -9,7 +9,7 @@ import regex as re
 
 class PipelineNode:
     """
-    Pipeline Node class that creates a node for each component in the pipeline.
+    Pipeline Node class that creates a node for each component in the pipeline and maps it to the diagrams object.
     """
     def __init__(self):
         self.node = None

@@ -236,7 +236,6 @@ class PipelineDiagram:
         Args:
             cluster_name (str): Name of the cluster to be formed.
             node_names (list): two dimensional list containing the elements like Node Name, URL corresponding to the nodes to be grouped.
-        
         Returns:
             list: list of cluster element objects.
         """

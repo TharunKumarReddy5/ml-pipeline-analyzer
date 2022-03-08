@@ -3,6 +3,9 @@ from evalml.automl import AutoMLSearch
 
 
 class PipelineSuggest:
+    """
+    PiplineSuggest class that suggests the best ML pipeline for a given dataset
+    """
     def __init__(self):
         # Add support for placeholder
         self.data = None
@@ -20,13 +23,22 @@ class PipelineSuggest:
 
     def fit(self, data, response, predictor_list, problem_type, objective='auto', test_size=0.2):
         """
-        This function takes the inputs from the user and parses the data to initialize the attributes and create the
-        x_train, x_test, y_train, y_test objects.
-            - The user provides with a dataframe as an input for data.
-            - response is the response variable or the dependent variable.
-            - predictor_list is the list of the predictors/independent variables.
-            - problem_type would be one of the supported problem_types by the evalml library.
-            - test_size is set to default 20%.
+        Initializes the attributes for the PipelineSuggest class and divides the data into train and test split
+
+        Args:
+            data (pd.DataFrame): The input data to find the best ML Pipeline. Required.
+            response (str): The response/target variable to be used for training. Required.
+            predictor_list (list): A list of predictor variables (str) to be used for training. Required.
+            problem_type (str): Types of supervised learning problem. Required.
+            objective (str): The objective to optimize for to find the best pipeline. Required. Defaults to 'auto'.
+                When set to 'auto', chooses:
+                    - LogLossBinary for binary classification problems,
+                    - LogLossMulticlass for multiclass classification problems, and
+                    - R2 for regression problems.
+            test_size (float): Percentage of test data after train test split. Optional. Defaults to 0.2
+
+        Returns:
+            None
         """
         self.data = data
         self.response = data[response]
@@ -51,6 +63,17 @@ class PipelineSuggest:
         # self.best_fe = Pipeline for the fe
 
     def suggest(self, suggest_type='all'):
+        """
+        Finds the best ML pipeline/model/feature engineering steps
+
+        Args:
+            suggest_type (str): The best pipeline part to suggest. Optional. Defaults to 'all'.
+                'fe' - Suggests the feature engineering steps of the best ML pipeline.
+                'model' - Suggests the model of the best ML pipeline.
+                'all' - Suggests the best ML pipeline.
+        Returns:
+            str: Returns the best pipeline part specific to the input parameter.
+        """
         if self.best_pipeline is None:
             self._suggest_helper()
 
@@ -63,4 +86,4 @@ class PipelineSuggest:
         elif suggest_type == 'model':
             return best_pipeline_components[0].strip()
 
-        return self.best_pipeline
+        return self.best_pipeline.summary

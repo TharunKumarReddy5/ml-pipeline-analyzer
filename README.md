@@ -3,6 +3,7 @@
 [![Build Status](https://app.travis-ci.com/TharunKumarReddy5/ml-pipeline-analyzer.svg?branch=main)](https://app.travis-ci.com/TharunKumarReddy5/ml-pipeline-analyzer)
 [![Coverage Status](https://coveralls.io/repos/github/TharunKumarReddy5/ml-pipeline-analyzer/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/TharunKumarReddy5/ml-pipeline-analyzer?branch=main&kill_cache=1)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+![Size](https://github-size-badge.herokuapp.com/:owner/:repo.svg)
 
 # Machine Learning Pipeline Analyzer (MLPA)
 
@@ -28,12 +29,11 @@ MLPA is an easier and simpler wrapper using the capabilities from the following 
  - [Graphviz](https://graphviz.org/)
  
 ## Authors
-*(in alpabetical order)*
-
 - [Aniket Fadia](https://github.com/aniketfadia96)
 - [Jasmine Bhalla](https://github.com/JasmineBhalla17)
 - [Sravan Hande](https://github.com/sravankr96)
 - [Tharun Kumar Reddy Karasani](https://github.com/TharunKumarReddy5)
+![GitHub Contributors Image](https://contrib.rocks/image?repo=TharunKumarReddy5/ml-pipeline-analyzer)
 
 ## Installing the package
 

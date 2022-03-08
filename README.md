@@ -94,7 +94,8 @@ python -m pip install -r requirements.txt
 
 **Code example_2**: Here in this part, the suggest function generates the output for the varoius components of the model depending upon what the user specifies:
 
-    b = PipelineSuggest(X, y, criterion='f1')
+    b = PipelineSuggest()
+    b.fit(data = df, response = 'survived', predictor_list = ['pclass','age','gender'], problem_type='binary', objective='auto', test_size=0.2)
     b.suggest(suggest_type='fe')
     b.suggest(suggest_type='model')
     b.suggest(suggest_type='all')

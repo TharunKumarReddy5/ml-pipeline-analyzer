@@ -8,11 +8,23 @@ import regex as re
 
 
 class PipelineNode:
+    """
+    Pipeline Node class that creates a node for each component in the pipeline.
+    """
     def __init__(self):
         self.node = None
         self.name = None
 
     def create_node(self, node_name):
+        """
+        Creates the nodes for the summary diagram.
+
+        Args:
+            node_name (list): List of base component name and the pipeline component name.
+
+        Returns:
+            obj: Diagram node object.
+        """
         self.node = node_name[0]
         self.name = re.sub(r'\(.*\)', '', str(node_name[1]))
 

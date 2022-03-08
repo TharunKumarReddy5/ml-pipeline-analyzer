@@ -249,7 +249,6 @@ class PipelineDiagram:
         Args:
             cluster_name (str): Name of the cluster to be formed.
             node_names (list): two dimensional list containing the elements like Node Name, URL corresponding to the nodes to be grouped.
-        
         """
         with self.g.subgraph(name='cluster_' + cluster_name) as c:
             inlabel = 'streamin_' + cluster_name

@@ -29,7 +29,6 @@ MLPA is an easier and simpler wrapper using the capabilities from the following 
 
  - [Scikit-Learn](https://scikit-learn.org/stable/)
  - [EvalML](https://evalml.alteryx.com/en/stable/)
- - [EvalML Github](https://github.com/alteryx/evalml)
  - [Graphviz](https://graphviz.org/)
  
 ## Installing the package

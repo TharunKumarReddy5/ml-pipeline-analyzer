@@ -29,7 +29,7 @@ def upload_file():
         fname = str(time.time()) + '.pkl'
         fp = os.path.join(os.getcwd(), 'uploads', 'model' + fname)
         uploaded_file.save(fp)
-        PipelineDiagram(joblib.load(fp), file_name=fname[:-4]).create_diagram()
+        PipelineDiagram(joblib.load(fp), file_name=fname[:-4]).show()
         pipeline_img_nm = fname[:-3] + 'png'
         pipeline_img_dest = os.path.join(os.getcwd(), 'app', 'static', pipeline_img_nm)
         os.rename(pipeline_img_nm, pipeline_img_dest)

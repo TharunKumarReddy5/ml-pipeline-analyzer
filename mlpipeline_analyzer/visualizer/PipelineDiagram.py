@@ -152,7 +152,7 @@ class PipelineDiagram:
             str: Dictionary string of the hyperparameters of the input pipeline component.
         """
         try:
-            s = list(obj.parameters.items() if self.base == 'evalml.pipelines.components' else obj._get_params().items())
+            s = list(obj.parameters.items() if self.base == 'evalml.pipelines.components' else obj.get_params().items())
             reg = re.sub(r"(,\s)\'", r"\l'", str(dict(filter(lambda x: '__' not in x[0], s))))
             return re.sub(r'(\(.*\))', '', str(obj)) + ' |' + re.sub('{|}', '', reg)
         except (NameError, IndexError, ReferenceError, Exception):

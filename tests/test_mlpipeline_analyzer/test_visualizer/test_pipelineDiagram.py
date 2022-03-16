@@ -3,6 +3,7 @@ import graphviz
 import joblib
 from mlpipeline_analyzer.visualizer.PipelineDiagram import PipelineDiagram
 
+
 class TestPipelineDiagram:
     def test_show_sklearn():
         sklearn_pipe = joblib.load('examples/sample_models/ml_pipeline.pkl')

@@ -1,3 +1,6 @@
+import os
+from pathlib import Path
+
 import pandas as pd
 from mlpipeline_analyzer.suggest import PipelineSuggest
 
@@ -11,7 +14,7 @@ class TestPipelineSuggest:
         """
         Test that the data is divided into train and test data before finding the best ML pipeline
         """
-        data = pd.read_csv('sample_data/income_classification.csv')
+        data = pd.read_csv(os.path.join(Path(os.path.dirname(os.path.realpath(__file__))), 'sample_data/income_classification.csv'))
         response = 'income'
         predictor = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status',
                      'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss',
@@ -32,7 +35,7 @@ class TestPipelineSuggest:
         """
         Test that the suggest function returns feature engineering steps of the best ML pipeline
         """
-        data = pd.read_csv('sample_data/income_classification.csv')
+        data = pd.read_csv(os.path.join(Path(os.path.dirname(os.path.realpath(__file__))), 'sample_data/income_classification.csv'))
         response = 'income'
         predictor = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status',
                      'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss',
@@ -52,7 +55,7 @@ class TestPipelineSuggest:
         """
         Test that the suggest function returns feature engineering steps of the best ML pipeline
         """
-        data = pd.read_csv('sample_data/income_classification.csv')
+        data = pd.read_csv(os.path.join(Path(os.path.dirname(os.path.realpath(__file__))), 'sample_data/income_classification.csv'))
         response = 'income'
         predictor = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status',
                      'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss',
@@ -72,7 +75,7 @@ class TestPipelineSuggest:
         """
         Test that the suggest function returns feature engineering steps of the best ML pipeline
         """
-        data = pd.read_csv('sample_data/income_classification.csv')
+        data = pd.read_csv(os.path.join(Path(os.path.dirname(os.path.realpath(__file__))), 'sample_data/income_classification.csv'))
         response = 'income'
         predictor = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status',
                      'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss',

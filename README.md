@@ -1,7 +1,7 @@
 
 # ml-pipeline-analyzer
 [![Build Status](https://app.travis-ci.com/TharunKumarReddy5/ml-pipeline-analyzer.svg?branch=main)](https://app.travis-ci.com/TharunKumarReddy5/ml-pipeline-analyzer)
-[![Coverage Status](https://coveralls.io/repos/github/TharunKumarReddy5/ml-pipeline-analyzer/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/TharunKumarReddy5/ml-pipeline-analyzer?branch=main&kill_cache=1)
+[![Coverage Status](https://coveralls.io/repos/github/TharunKumarReddy5/ml-pipeline-analyzer/badge.svg?branch=main&service=github&kill_cache=1)](https://coveralls.io/github/TharunKumarReddy5/ml-pipeline-analyzer?branch=main&service=github&kill_cache=1)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 ![contributors](https://img.shields.io/github/contributors/TharunKumarReddy5/ml-pipeline-analyzer.svg)
 ![codesize](https://img.shields.io/github/languages/code-size/TharunKumarReddy5/ml-pipeline-analyzer.svg) 

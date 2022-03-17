@@ -102,10 +102,10 @@ Following sofware design principles have been considered while packaging MLPA:
 - Unit testing and coverage for quality assurance
 
 ## Authors
+- [Tharun Kumar Reddy Karasani](https://github.com/TharunKumarReddy5)
+- [Sravan Hande](https://github.com/sravankr96)
 - [Aniket Fadia](https://github.com/aniketfadia96)
 - [Jasmine Bhalla](https://github.com/JasmineBhalla17)
-- [Sravan Hande](https://github.com/sravankr96)
-- [Tharun Kumar Reddy Karasani](https://github.com/TharunKumarReddy5)
 
 ![GitHub Contributors Image](https://contrib.rocks/image?repo=TharunKumarReddy5/ml-pipeline-analyzer)
 

@@ -14,6 +14,7 @@
 Machine Learning Pipeline Analyzer (MLPA) is a python package that at its core analyzes, suggests and visualizes machine learning pipelines.
 
 One of the primary goals of this package is to provide the user with a self-intuitive visual diagram of the pipeline model that explains the various components of the model and its respective attributes while also suggesting the changes and best pipeline model for the user needs.
+ - [Try it!](https://ml-pipeline-viz.herokuapp.com/)
 
 ## Motivation
 

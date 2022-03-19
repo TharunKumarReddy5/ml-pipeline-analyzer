@@ -44,15 +44,63 @@ Install the dependencies from the requirements.txt file using
     
 ## Package Structure:
 Here are the main folders in our github MLPA repository:
-    App 
-    docs
-    examples
-    icons
-    mlpipeline_analyzer
-     - suggest
-     - visualizer
-    tests
-    uploads
+```bash
+.
+├── CHANGELOG.txt
+├── LICENSE
+├── MANIFEST.in
+├── Procfile
+├── README.md
+├── app
+│   ├── main.py
+│   ├── static
+│   │   ├── css
+│   │   ├── diagrams.png
+│   │   ├── evalml.svg
+│   │   ├── image_exp3.jpeg
+│   │   ├── img.png
+│   │   ├── sklearn.png
+│   │   └── w3.css
+│   └── templates
+│       └── index.html
+├── docs
+│   └── MLPA.pptx
+├── examples
+│   ├── machine_learning_pipeline.png
+│   ├── ml_pipeline_params.PNG
+│   ├── ml_pipeline_params.pdf
+│   ├── sample_models
+│   │   ├── automl_pipeline.pkl
+│   │   ├── ml_pipeline.pkl
+│   │   └── ml_pipeline_income_classification.pkl
+│   ├── sample_usage.ipynb
+│   └── sample_usage.py
+├── icons
+│   └── tree.png
+├── mlpipeline_analyzer
+│   ├── __init__.py
+│   │   ├── suggest
+│   │   │	├── PipelineSuggest.py
+│   │   │	├── __init__.py
+│   └── visualizer
+│       ├── PipelineDiagram.py
+│       ├── PipelineNode.py
+│       ├── __init__.py
+├── requirements.txt
+├── setup.py
+├── tests
+│   ├── test_app
+│   │   └── test_main.py
+│   └── test_mlpipeline_analyzer
+│       ├── test_suggest
+│       └── test_visualizer
+├── uploads
+│   └── sample-pipeline.pkl
+├── .coveragerc
+├── .gitignore
+├── .travis.yml
+├── .wsgi.py
+```
 
 ## Code Examples:
 
